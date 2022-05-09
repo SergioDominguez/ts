@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LWG TS Player non-safe for test builds only not WEEKLY
 // @namespace    http://tampermonkey.net/
-// @version      0.040a-non-safe
+// @version      0.041a-non-safe
 // @description  custom LWG Script!
 // @author       CRYPTODUDE + LWG DEVS - Modify from exisiting scripts + add different GUI
 // @credits      Groovy and Mohkari
@@ -17,6 +17,12 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
 
+// LWG TS PLAYER vers. 0.041a-non-safe for test builds only not WEEKLY
+// changes 
+//  - Fix for looking for connection cancel trade(if u encounter this it will use start auto-sell custom timer, and it will restart auto-sell after that amount of seconds pass). Still if u manually press to hide the stop auto-sell window it will not start auto-sell until you toggle it again form menu.
+//  - Fixed css on Current rank for stars/h rightside tracker (now it should be shown on left correctly along with the /h).
+//  - minor fixes on some other css/functions.
+
 // LWG TS PLAYER vers. 0.040a-non-safe for test builds only not WEEKLY
 // changes 
 //  - Fix for Cancel Trade (still experimental, now it should correctly track and remove the window on click).
@@ -31,13 +37,18 @@
   
   (function() {
       'use strict';
-        var versionLWG = "0.040a non-safe";
+        var versionLWG = "0.041a non-safe";
         var strSellingData = "";
         var displayactivestatement = "";
 
         let getautoscriptload = 0;
         let loaded = 0;
         let leaderTracker = [];
+
+        let apiTokenSet = false;
+        let timeleft = 15;
+
+        var crossClicked = false;
 
   ///////////
     // NOTES //
@@ -191,6 +202,7 @@
        
 
 // autoplay button for reload script + jimmy (which doesnt work)
+
 async function getlwgGame() {
   console.log("getGame");
   while (typeof Game == 'undefined' || (Game && Game.gameData == null)) {
@@ -219,7 +231,6 @@ new MutationObserver(async function(mutations) {
 //  AddLWGoptions();
   }
 }).observe(document, {childList: true, subtree: true});
-
 
 
 async function ActivateGuiWindow() {
@@ -853,15 +864,41 @@ async function CheckCrafts() {
 //cancel button disabling auto-sell
 $(".trade-connection").find(".no").on("click", CheckCancelbutton);
 
-
-
-
-
 function CheckCancelbutton() {
 $( ".startSelling").prop('checked', false);
 localStorage.setItem("startSelling",false);
 console.log('Auto-Sell Has been disabled. Please re-enable it manualy via script menu');
 document.getElementById("overlay").style.display = "block";
+// start timer 
+  if (($("#overlay").is(':visible'))) {
+  var counter = getautoselltime;
+  var interval = setInterval(function() {
+      counter--;
+      // Display 'counter' wherever you want to display it.
+      if (counter <= 0 && crossClicked == false) {
+        crossClicked = false;
+           clearInterval(interval);
+          $('#time').html("<h3>Auto-Sell Restart in progress</h3>");
+          $( ".startSelling").prop('checked', true);
+          localStorage.setItem("startSelling",true);
+          $("#overlay").hide();  
+          return;
+      }else{
+        crossClicked = false;
+        $("#overlay").click(function(){
+          crossClicked = true;
+          clearInterval(interval);
+          $( ".startSelling").prop('checked', false);
+          localStorage.setItem("startSelling",false);
+          return;
+        });       
+        $('#time').html(counter);
+        console.log("Auto-Sell Restart Timer --> " + counter);
+      }
+  }, 1000);
+}
+// end timer 
+
 
 //document.querySelector('#autosell-status .bank').textContent = 'LWG TS v.'+versionLWG+' Auto-Sell Disabled'; 
 }
@@ -1524,20 +1561,27 @@ async function lwgActivateProductionMonitor(){
             
             
                 /**
-                 * Add Overlay Text
+                 * Add   Text
                  */
                 function lwgaddoverlay(){
                   let htmlzx = "<div id='overlay' style='display:none;'>";
-                      htmlzx += "<div id='calceltext'><b>User Action on Cancel Trade Button disabled Auto-Sell</b><br><span style='font-size:22px;'>***Please open menu and activate it again when done with sale settings***</span></br><span style='font-size:16px;color:yellow;font-weight:bold;'>click anywhere to close this message</span></div>"
+                      htmlzx += "<div id='calceltext'><b>User Action on Cancel Trade Button disabled Auto-Sell</b><br><span style='font-size:22px;'>***Please open menu and activate it again when done with sale settings***</span></br><span style='font-size:16px;color:yellow;font-weight:bold;'>click anywhere to close this message</span></br><div><span id='timer'><span id='time'>15</span> Seconds remaining until auto-sell restarts</span></div></div>"
                       $('body').after(htmlzx);
               
                   }
                 // Toggle div display
                 await WaitForElement('#overlay');
                 $("#overlay").click(function(){
+                  crossClicked = true;
                   $("#overlay").hide();
               });
-            
+                   
+
+
+
+
+
+
             
                 /**
                  * Add restart button HTML
@@ -1681,7 +1725,7 @@ async function lwgActivateProductionMonitor(){
             hudRight.insertBefore(scoresContainer, hudRight.querySelector('.right-hud').nextSibling);
             CheckPlayerScores();
     //hover function
-            $(resetScoreButton).hover(function () {
+            $('#reset-scores').hover(function() {
                 $(this).css("background", "#fff");
             }, function () {
                 $(this).css("background", "#00000000");
@@ -1838,10 +1882,10 @@ function LoadLWGLeaderboard() {
   function activateDisplayRank() {
       let rank = document.createElement('div');
       rank.id = 'player-personal-rank';
-      rank.style = 'font-size: 20px;min-width: 50px !important;text-align: center !important;position: absolute !important;top: 100px !important;right: 258px !important;height:54px !important;opacity: 0.8;border: 4px solid rgb(204, 204, 204);background-color: rgb(255, 255, 255);padding-left: 5px;padding-right: 5px;border-radius: 5px;}';
+      rank.style = 'font-size: 20px;min-width: 50px !important;text-align: center !important;height:54px !important;opacity: 0.8;border: 4px solid rgb(204, 204, 204);background-color: rgb(255, 255, 255);padding-left: 5px;padding-right: 5px;border-radius: 5px;margin-right: -3px;margin-top: 10px;}';
       rank.textContent = '';
       const leaderboardImage = document.querySelector('#player-scores-monitor');
-      leaderboardImage.parentNode.insertBefore(rank, leaderboardImage.nextSibling);
+      leaderboardImage.parentNode.insertBefore(rank, leaderboardImage);
       getRank();
   }
   
