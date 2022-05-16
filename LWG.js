@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         LWG TS Player non-safe for test builds only not WEEKLY
+// @name         LWG TS Player safe for weekly
 // @namespace    http://tampermonkey.net/
-// @version      0.041a-non-safe
+// @version      0.042a-safe
 // @description  custom LWG Script!
 // @author       CRYPTODUDE + LWG DEVS - Modify from exisiting scripts + add different GUI
 // @credits      Groovy and Mohkari
@@ -17,18 +17,99 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
 
-// LWG TS PLAYER vers. 0.041a-non-safe for test builds only not WEEKLY
+// LWG TS PLAYER vers. 0.042a-safe weekly version along to current GALA TOS
+// changes 
+//  - Added Dragon trade-depot
+
+// LWG TS PLAYER vers. 0.041a-safe weekly version along to current GALA TOS
 // changes 
 //  - Fix for looking for connection cancel trade(if u encounter this it will use start auto-sell custom timer, and it will restart auto-sell after that amount of seconds pass). Still if u manually press to hide the stop auto-sell window it will not start auto-sell until you toggle it again form menu.
 //  - Fixed css on Current rank for stars/h rightside tracker (now it should be shown on left correctly along with the /h).
 //  - minor fixes on some other css/functions.
 
-// LWG TS PLAYER vers. 0.040a-non-safe for test builds only not WEEKLY
+// LWG TS PLAYER vers. 0.040a-safe weekly version along to current GALA TOS
 // changes 
 //  - Fix for Cancel Trade (still experimental, now it should correctly track and remove the window on click).
 //  - Added stars/h rightside tracker with reset button inside it(Special thanks to Thaimachine for allowing this to be used here, with some modifications).
 //  - minor fixes on some other css/functions.
 
+// LWG TS PLAYER vers. 0.039a-safe weekly version along to current GALA TOS
+// changes 
+//  - Fix for sale reset, now it should correctly display sale as 0 when reseted.
+//  - Fix for larger Custom input timer for auto-sell
+//  - minor fixes on some other css/functions.
+
+// LWG TS PLAYER vers. 0.038a-safe weekly version along to current GALA TOS
+// changes 
+//  - Fix for Townstar Window Settings and additional settings not showing correctly(global css has been removed)
+//  - Fix for Auto-search filter now will work even if u use your keybinding or not.(it wont close window if for example u press d while typing)
+//  - Added clear option to filter (while you type u will see X shown on the right inside the input field, just press it to delete filter)
+//  - Special Window Overlay added when you press cancel trade button (you wont miss it now that script autosell is disabled)
+//  - added special donation info down on auto-sell area (some of you might like it and some wont) No one is obliged to donate, feel free to do if u want to. Its my gala ETH address.
+//  - minor fixes on some other functions to make it more smooth.
+
+// LWG TS PLAYER vers. 0.037a-safe weekly version along to curent GALA TOS
+// changes 
+//  - Fix for % loading game.
+
+// LWG TS PLAYER vers. 0.036a
+// changes 
+//  - Removed Auto-complete because its against Gala TOS.
+//  - Removed Auto-Skins because its against Gala TOS.
+//  - Removed Close Start Popup because its against Gala TOS.
+//  - Removed GMT zone input for your right side production monitor (normal fix was applied and no need to GMT timezone).
+//  - Added Groovy Leaderboard and increase its volume to display stars to players 1-5000
+//  - Added function to stop and disable auto-sell option if user clicks on cancel trade (it will disable auto-sell button + will display in console)
+//  - Increased the timer for first startup sell (because as i have seen it bugs the script if no town is shown 3x times with 10 secs timer)
+//  - minor other css and code cleanup
+
+// LWG TS PLAYER vers. 0.035a
+// changes 
+//  - Added new timer input for how long to wait before it triggers auto-sell minimum is 5 seconds.
+//  - Added GMT zone input for your right side production monitor for Reset Button to show corectly.
+//  - Change jquery link on script due to i found problem where normal jquery link was blocked by ISP/Firewall on one member.
+//  - minor other css code cleanup
+
+// LWG TS PLAYER vers. 0.034a
+// changes 
+//  - Totally New Redesigned Left Inventory Info Management with toggle option (whatever you choose it will show and its a bit experimental, lets see how it will go).
+//  - Removed Some unwanted console log info.
+//  - Because many LWG members asked I'm putting back again Rights Side Monitor Reset Button
+//  - minor other css code cleanup
+
+// LWG TS PLAYER vers. 0.033a
+// changes 
+//  - New Left sidebar options with special toggle when you enable left side production monitor info.
+//  - Removed Money /s/m/h (logic didnt work, and tbh its huge formula with multiple vars which will make a loooong time to be made)
+//  - Fixed keybinding to open menu (now it wont matter if u pressed D or d or whatever a-z or A-Z value you input in settings keybinding area)
+//  - Auto-complete Fix (now no more mistake on removal items. Enjoy it)
+//  - minor other css code cleanup
+
+// LWG TS PLAYER vers. 0.032a
+// changes 
+//  - Finaly fixed left sidebar info tracking (needed to recreate everything).
+//  - Added Money /s/m/h (this is experimental still)
+//  - minor other code cleanup
+
+// LWG TS PLAYER vers. 0.031a
+// changes 
+//  - Auto-sell will be paused if you have any craft window popup open, store fullscreen window or even remove window popup open. It will auto sell after you choose your building to be build, or you click remove item, or switch to some other type of craft.
+//  - Due to gala level to be vissible toggle button for menu is move to the right near the LWG V. Auto sell text
+//  - minor other code cleanup
+
+// LWG TS PLAYER vers. 0.030a
+// changes 
+//  - added toggle for left production info
+//  - Removed left Sale info due to it doesnt work and its bugged. Only way you can see your sell /s/m/h will be on rightside monitor until fix is done
+//  - enjoy it
+
+// LWG TS PLAYER vers. 0.029a
+// changes 
+//  - added custom toggle for removal of scrollbar on side bar production monitor
+//  - added filter-search option for fast find autosell options
+//  - changed mohkarl production monitor code functions (still wont load 2x of them at same time, waiting for him to return and will try to fix on tuesday when he is back)
+//  - some other minor changes in css/code.
+//  - enjoy it
 
  
       function GM_addStyle(style) {
@@ -37,10 +118,10 @@
   
   (function() {
       'use strict';
-        var versionLWG = "0.041a non-safe";
+        var versionLWG = "0.042a-safe";
         var strSellingData = "";
         var displayactivestatement = "";
-
+        
         let getautoscriptload = 0;
         let loaded = 0;
         let leaderTracker = [];
@@ -54,8 +135,6 @@
     // NOTES //
     ///////////
 
-
-
     // will auto populate/display while game is running
     let lwglist = {};
 
@@ -64,8 +143,8 @@
 
 
     //adding data for selling
-    var aData = [];
-    var outputd = [];
+    let aData = [];
+    let outputd = [];
 
       // css style
 
@@ -177,6 +256,8 @@
        GM_addStyle(".savelwgbutton {border: 1px solid #059862;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;margin: 4px 2px;cursor: pointer; background-color: #04AA6D;  color: white; font-size: 18px;  padding: 6px 25px;  margin-top: 4px;  border-radius: 5px;  word-spacing: 10px;}");
 
        GM_addStyle(".savelwgbutton:hover {background-color: #059862; color: white;}");
+
+
 // overlay text
        GM_addStyle("#overlay {position: fixed;display: none;width: 100%;height: 100%;top: 0;left: 0;right: 0;bottom: 0;background-color: rgba(0,0,0,0.5);z-index: 2;cursor: pointer;}");
       
@@ -198,7 +279,7 @@
        GM_addStyle(' #reset-scores.PSMbox1:hover{ transition:1s ease-in-out; transform: rotate(-360deg); }')
       //syncButton
 
-  
+      
        
 
 // autoplay button for reload script + jimmy (which doesnt work)
@@ -239,17 +320,8 @@ async function ActivateGuiWindow() {
   if(localStorage.getItem("LWGcraftingItems") === null){    
     localStorage.setItem("LWGcraftingItems","[]")
   }
-  if(localStorage.getItem("startSkins") === null){    
-    localStorage.setItem("startSkins",false)
-  }
-  if(localStorage.getItem("startComplete") === null){    
-    localStorage.setItem("startComplete",false)
-  }
   if(localStorage.getItem("startSelling") === null){    
     localStorage.setItem("startSelling",false)
-  }
-  if(localStorage.getItem("startPopupBox") === null){    
-    localStorage.setItem("startPopupBox",false)
   }
   if(localStorage.getItem("startSideProduction") === null){    
     localStorage.setItem("startSideProduction",true)
@@ -281,42 +353,34 @@ async function ActivateGuiWindow() {
   
 //      nodegui+="<div class='tab' style='flex: 0;'>";
 //      nodegui+="<img loading='lazy' src='https://img.icons8.com/ios-filled/50/ffffff/fast-moving-consumer-goods.png' alt='auto-craft' width='32' height='32'>";
-//      nodegui+="<h2>Auto-Craft</h2>";
+//      nodegui+="<h2 class='lwgbody' style='font: 16px Arial, Helvetica, sans-serif;'>Auto-Craft</h2>";
 //      nodegui+="</div>";
   
 //      nodegui+="<div class='tab' style='flex: 0;'>";
 //      nodegui+="<img loading='lazy' src='https://img.icons8.com/ios-filled/50/ffffff/hammer-and-anvil.png' alt='auto-build' width='32' height='32'>";
 //      nodegui+="<h2>Auto-Build</h2>";
 //      nodegui+="</div>";
-  
+
       nodegui+="<div class='tab' style='flex: 0;'>";
       nodegui+="<img loading='lazy' src='https://img.icons8.com/ios-filled/50/ffffff/settings.png' alt='settings' width='32' height='32'>";
       nodegui+="<h2 class='lwgbody' style='font: 22px Arial, Helvetica, sans-serif;font-weight:bold;'>Settings</h2>";
       nodegui+="</div>";
       nodegui+="</section>";
-  
       nodegui+="<section class='content-pane'>";
       nodegui+="<div class='tab-content tab-content-active'>";
       nodegui+="<h2 class='lwgbody' style='font: 22px Arial, Helvetica, sans-serif;font-weight:bold;'>Auto-Sell Options</h2>";
       nodegui+="<b style='font: 16px Arial, Helvetica, sans-serif;'>Filter-Search : </b></b><input type='text' class='lwg clearable' id='lwgsearch' placeholder='Example. Cake' autocomplete='off' style='width: 200px!important; height: 18px; font-size: 16px;margin-left:10px!important;margin-bottom:10px!important;border:1px solid #ddd;margin-right:10px;'></input>";
-//      nodegui+="<label class='switch switch-green'><input type='checkbox' class='displayChecked switch-input' id='display-checked' name='display-checked'><span class='switch-label' data-on='On' data-off='Off'></span><span class='switch-handle'></span></label><span style='line-height: 20px;padding-left:5px;font-size:18px;vertical-align: middle;'>Display only checked</span>";
+//      nodegui+="<label class='switch switch-green'><input type='checkbox' class='displayChecked switch-input' id='display-checked' name='display-checked'><span class='switch-label' data-on='On' data-off='Off'></span><span class='switch-handle'></span></label><span style='line-height: 20px;padding-left:5px;font-size:16px;vertical-align: middle;'>Display only checked</span>";
       nodegui+="<div id='box' class='box tab-content-white'></div>";
-
-
-
-
-
 // testing toggle switch
       nodegui+="<div style='float:left;'>";
       nodegui+="<p><label class='switch switch-green'><input type='checkbox' class='lwg startSelling switch-input' id='auto-selling' name='auto-selling'><span class='switch-label' data-on='On' data-off='Off'></span><span class='switch-handle'></span></label><span style='line-height: 26px;padding-left:5px;font-size:18px;'>Start Auto-Sell</span>";
 // check timer input for auto-sell
       nodegui+="<span style='line-height: 26px;padding-left:20px;font-size:18px;'>Custom Timer : </span> <span class='input-help'><input type='number' min='5' class='autosellTimerkey' id='autosell-timer-key' name='autosell-timer-key' style='width: 40px; height: 18px; font-size: 16px; border: 1px solid;' value=''></input><span style='line-height: 26px;padding-left:5px;font-size:18px;padding-right:5px'> Seconds</span><button class='savelwgbutton'>Save</button><small id='autoselltimerHelpBlock' class='form-text text-muted' style='padding-left:3px'>Min. 5 seconds</small> </span>";
       nodegui+="</p>";
-      nodegui+="<p><label class='switch switch-green'><input type='checkbox' class='startComplete switch-input' id='auto-complete' name='auto-complete'><span class='switch-label' data-on='On' data-off='Off'></span><span class='switch-handle'></span></label><span style='line-height: 26px;padding-left:5px;font-size:18px;'>Auto Complete Constructions</span></p>";
       nodegui+="<iframe width='575' height='72' src='https://www.dnkdesign.com.mk/lwgscript/dude-donations-small.html' frameborder='0' scrolling='no' style='overflow: hidden;padding-left:10px;'></iframe>";
       nodegui+="</div>";
-//      nodegui+="<button class='button-reset resetTown'>New Town Reset Settings</button><p>testing-purpose";
-      
+//      nodegui+="<button class='button-reset resetTown'>New Town Reset Settings</button><p>testing-purpose";     
       nodegui+="</div>";
 //      nodegui+="<div class='tab-content'>";
 //      nodegui+="<h2 style='text-align:center;'>Auto-Craft Options</h2>";
@@ -339,11 +403,6 @@ async function ActivateGuiWindow() {
 //      nodegui+="</p>";
       // sideproduction switch scrollbar
       nodegui+="<p style='padding-left:20px;'><label class='switch switch-green'><input type='checkbox' class='lwg startSideProductionScrollbar switch-input' id='side-production-settings-scrollbar' name='side-production-settings-scrollbar'><span class='switch-label' data-on='On' data-off='Off'></span><span class='switch-handle'></span></label><span style='line-height: 26px;padding-left:5px;font-size:18px;'>Display Right Sidebar Production Monitor Scrollbar</span></p></div>";
-      // earn box start switch
-      nodegui+="<p><label class='switch switch-green'><input type='checkbox' class='lwg startPopupBox switch-input' id='start-popup-settings' name='start-popup-settings'><span class='switch-label' data-on='On' data-off='Off'></span><span class='switch-handle'></span></label><span style='line-height: 26px;padding-left:5px;font-size:18px;'>Display Start Popup Box - Introducing Play to Earn!</span></p>";
-      // all skins start switch
-      nodegui+="<p><label class='switch switch-green'><input type='checkbox' class='lwg startSkins switch-input' id='start-skins-settings' name='start-skins-settings'><span class='switch-label' data-on='On' data-off='Off'></span><span class='switch-handle'></span></label><span style='line-height: 26px;padding-left:5px;font-size:18px;'>Auto Apply All Skins</span></p>";
-
       nodegui+="<div id='developer-extra'><p><span style='line-height: 26px;padding-left:5px;font-size:18px;text-align:center;'>DEVELOPER AREA FOR TESTING JSON</span></p>";
 //      nodegui+="<p><textarea id='configTxtleft' rows='1' cols='1' class='resettable' style='width: 590px; height: 200px;' readonly></textarea></p>";
       nodegui+="<p><textarea id='configTxt' rows='1' cols='1' class='resettable' style='width: 590px; height: 200px;' readonly></textarea></p></div>";
@@ -406,6 +465,7 @@ async function ActivateGuiWindow() {
       }
     };
     
+    
       //show hide options
       document.getElementById("gui").style.display = "none";
       const targetDiv = document.getElementById("gui");
@@ -417,8 +477,6 @@ async function ActivateGuiWindow() {
           targetDiv.style.display = "none";
       }
       };
-  
- 
   
   // general auto-sell area (JSON values will be removed later due to we want to grab them auto from the game or by some JSON file (due to different metas))
   var rows =   [
@@ -488,7 +546,7 @@ async function ActivateGuiWindow() {
                 asell+="</ul>";
                 document.getElementById("box").innerHTML = asell;
 
-
+                
 
 // LOCALSTORAGE SAVING JSON
 
@@ -579,20 +637,6 @@ document.querySelectorAll(".startSelling").forEach(function (btn) {
 var checked = JSON.parse(localStorage.getItem("startSelling"));
     document.getElementById("auto-selling").checked = checked;
 
-// StartComplete checkbox 
-function savecomplete() {	
-	var checkboxs = document.getElementById("auto-complete");
-    localStorage.setItem("startComplete", checkboxs.checked);	
-}
-
-document.querySelectorAll(".startComplete").forEach(function (btn) {
-    btn.addEventListener("click", savecomplete);
-});
-
-var checkeds = JSON.parse(localStorage.getItem("startComplete"));
-    document.getElementById("auto-complete").checked = checkeds;
-
-
 // startSideProduction checkbox 
 function saverightprod() {	
 	var checkboxs = document.getElementById("side-production-settings");
@@ -634,34 +678,6 @@ document.querySelectorAll(".startLeftProdInfo").forEach(function (btn) {
 var checkboxsleftinfo = JSON.parse(localStorage.getItem("startLeftProdInfo"));
     document.getElementById("side-production-left-info").checked = checkboxsleftinfo; 
 
-
-// startPopupbox checkbox 
-function savestartPopup() {	
-	var checkboxs = document.getElementById("start-popup-settings");
-    localStorage.setItem("startPopupBox", checkboxs.checked);	
-}
-
-document.querySelectorAll(".startPopupBox").forEach(function (btn) {
-    btn.addEventListener("click", savestartPopup);
-});
-
-var checkedsss = JSON.parse(localStorage.getItem("startPopupBox"));
-    document.getElementById("start-popup-settings").checked = checkedsss;    
-  
-
-// startSkins checkbox 
-function saveallskins() {	
-	var checkboxs = document.getElementById("start-skins-settings");
-    localStorage.setItem("startSkins", checkboxs.checked);	
-}
-
-document.querySelectorAll(".startSkins").forEach(function (btn) {
-    btn.addEventListener("click", saveallskins);
-});
-
-var checkedssss = JSON.parse(localStorage.getItem("startSkins"));
-    document.getElementById("start-skins-settings").checked = checkedssss; 
-
       //Show hide dev area
       var develem = document.getElementById('developer-extra'),
       devcheckBox = document.getElementById('developer-settings');
@@ -671,37 +687,46 @@ var checkedssss = JSON.parse(localStorage.getItem("startSkins"));
       };
       devcheckBox.onchange();
 
-
-      //Show StartBox
-      let startPopupBox = JSON.parse(localStorage.getItem("startPopupBox"));
-      if(startPopupBox === false){
-        CloseWindows(document.querySelectorAll('body > .container > .player-confirm .dialog-cell'), false);
-        CloseWindows(document.querySelectorAll('.container > div:not(.hud):not(.player-confirm)'), true);
-      }
-
-
   
 // search crafts
-$(function(){
+      $(function(){
 
-    $('#lwgsearch').keyup(function(){
-        
-        var searchText = $(this).val().toUpperCase();
-        
-        $('ul.border_bottom > li').each(function(){
+        $('#lwgsearch').keyup(function(){
             
-          if ($(this).text().toUpperCase().search(searchText) > -1) {
-            $(this).show();
-        }
-        else {
-             $(this).hide();
-        }                
-        });     
+            var searchText = $(this).val().toUpperCase();
+            
+            $('ul.border_bottom > li').each(function(){
+                
+              if ($(this).text().toUpperCase().search(searchText) > -1) {
+                $(this).show();
+            }
+            else {
+                 $(this).hide();
+            }                
+            });     
+        });
+    
     });
 
-});
 
+  /**
+ * Clearable text inputs
+ */
+   function tog(v){return v ? "addClass" : "removeClass";} 
+   $(document).on("input", ".clearable", function(){
+       $(this)[tog(this.value)]("x");
+   }).on("mousemove", ".x", function( e ){
+       $(this)[tog(this.offsetWidth-18 < e.clientX-this.getBoundingClientRect().left)]("onX");
+   }).on("touchstart click", ".onX", function( ev ){
+       ev.preventDefault();
+       $(this).removeClass("x onX").val("").change();
+       $(this).attr("placeholder", "Example. Cake");
+       $('ul.border_bottom > li').each(function(){
+        $(this).show();
+       })
+   }); 
 
+   
 
   // menucustomKey input 
 
@@ -735,29 +760,28 @@ var timerkeys = localStorage.getItem("autosellTimerkey");
 
 
 
-
 // clear on focus 
-$('#custom-key').focus(function() { 
-    $(this).val(''); 
-  });
+      $('#custom-key').focus(function() { 
+        $(this).val(''); 
+      });
 
-  $('#custom-key').attr('maxlength', '1');
+      $('#custom-key').attr('maxlength', '1');
 
-  // fix for zoom in out on scroll     
-  await WaitForElement('#gui-status');    
-  const fooz = document.querySelector('#gui-status')  
-  fooz.addEventListener('wheel', (event) => { event.stopPropagation();});
-  fooz.addEventListener('mousedown', (event) => { event.stopPropagation();});
-  fooz.addEventListener('mouseup', (event) => { event.stopPropagation();});
-}
+      // fix for zoom in out on scroll     
+      await WaitForElement('#gui-status');    
+      const fooz = document.querySelector('#gui-status')  
+      fooz.addEventListener('wheel', (event) => { event.stopPropagation();});
+      fooz.addEventListener('mousedown', (event) => { event.stopPropagation();});
+      fooz.addEventListener('mouseup', (event) => { event.stopPropagation();});
+    }
 
-async function WaitForElement(selector) {
-  while (document.querySelector(selector) === null) {
-      await new Promise( resolve => requestAnimationFrame(resolve) )
+    async function WaitForElement(selector) {
+      while (document.querySelector(selector) === null) {
+          await new Promise( resolve => requestAnimationFrame(resolve) )
+      }
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return document.querySelector(selector);
   }
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  return document.querySelector(selector);
-}
   
 
 
@@ -832,6 +856,10 @@ async function CheckCrafts() {
                   targetTradeObj = GetAvailableTradeObject(50);
                   var loadeditems = '50';
               }
+              if (!targetTradeObj && Game.town.GetStoredCrafts()[craftedItems[i].item] >= 25 && craftedItems[i].sellMin >= 25){
+                targetTradeObj = GetAvailableTradeObject(25);
+                var loadeditems = '25';
+            }
               if (!targetTradeObj && Game.town.GetStoredCrafts()[craftedItems[i].item] >= 10 && craftedItems[i].sellMin >= 10){
                   targetTradeObj = GetAvailableTradeObject(10);
                   var loadeditems = '10';
@@ -870,7 +898,7 @@ localStorage.setItem("startSelling",false);
 console.log('Auto-Sell Has been disabled. Please re-enable it manualy via script menu');
 document.getElementById("overlay").style.display = "block";
 // start timer 
-  if (($("#overlay").is(':visible'))) {
+if (($("#overlay").is(':visible'))) {
   var counter = getautoselltime;
   var interval = setInterval(function() {
       counter--;
@@ -898,6 +926,9 @@ document.getElementById("overlay").style.display = "block";
   }, 1000);
 }
 // end timer 
+
+
+
 
 
 //document.querySelector('#autosell-status .bank').textContent = 'LWG TS v.'+versionLWG+' Auto-Sell Disabled'; 
@@ -996,153 +1027,153 @@ if(document.getElementById("auto-selling").checked == true) {
 // start of new left sidebar monitor
 function GetLeftDataInfo() {
    
-    var infoarr = [ 'Blue_Steel', 'Cake', 'Baguette', 'Pinot_Noir', 'Pumpkin_Pie', 'Batter', 'Steel', 'Cabernet_Sauvignon', 'Uniforms', 'Candy_Canes', 'Dough', 'Chardonnay', 'Wool_Yarn', 'Butter', 'Wine_Bottle', 'Oak_Barrel', 'Chromium', 'Iron', 'Limestone', 'Wool', 'Milk', 'Cotton_Yarn', 'Sugar', 'Pinot_Noir_Grapes', 'Salt', 'Flour', 'Jet_Fuel', 'Cabernet_Grapes', 'Eggs', 'Gasoline', 'Lumber', 'Pumpkin', 'Silica', 'Chardonnay_Grapes', 'Peppermint', 'Petroleum', 'Sugarcane', 'Cotton', 'Feed', 'Brine', 'Wheat', 'Oak_Wood', 'Wood', 'Energy', 'Crude_Oil', 'Water_Drum' ];
+  var infoarr = [ 'Blue_Steel', 'Cake', 'Baguette', 'Pinot_Noir', 'Pumpkin_Pie', 'Batter', 'Steel', 'Cabernet_Sauvignon', 'Uniforms', 'Candy_Canes', 'Dough', 'Chardonnay', 'Wool_Yarn', 'Butter', 'Wine_Bottle', 'Oak_Barrel', 'Chromium', 'Iron', 'Limestone', 'Wool', 'Milk', 'Cotton_Yarn', 'Sugar', 'Pinot_Noir_Grapes', 'Salt', 'Flour', 'Jet_Fuel', 'Cabernet_Grapes', 'Eggs', 'Gasoline', 'Lumber', 'Pumpkin', 'Silica', 'Chardonnay_Grapes', 'Peppermint', 'Petroleum', 'Sugarcane', 'Cotton', 'Feed', 'Brine', 'Wheat', 'Oak_Wood', 'Wood', 'Energy', 'Crude_Oil', 'Water_Drum' ];
+
   
+  
+  if(lwgtimeStart == false){
+    return;
+}
+
+        // start interval if not already started
+        if(lwgtimeStart == true){
+
+  for(let i=0, n=infoarr.length; i < n; i++) {
     
-    
-    if(lwgtimeStart == false){
-      return;
-  }
-  
-          // start interval if not already started
-          if(lwgtimeStart == true){
-  
-    for(let i=0, n=infoarr.length; i < n; i++) {
+
+    $('.hud-craft-display-'+infoarr[i]).find('.contextual').prepend('<div id="choseninventory-'+infoarr[i]+'" class="choseninventory-'+infoarr[i]+'" style="width:40px"></div>');
+    $('#choseninventory-'+infoarr[i]).append('<input type="checkbox" id="filter-inventory-'+infoarr[i]+'" class="lwg saveButtonl" style="width: 18px; height: 18px;">');
+    setInterval(function(){
+//      document.getElementById("filter-inventory-"+infoarr[i]).checked
       
-  
+    if ($("#filter-inventory-"+infoarr[i]+":checked" ).length){ 
+      $('.hud-craft-display-'+infoarr[i]).find('.contextual').css("height", "fit-content");
+      $('.hud-craft-display-'+infoarr[i]).find('.contextual').removeClass('wide30'); 
+      $('.hud-craft-display-'+infoarr[i]).find('.contextual').find('hud-craft-amount').removeClass('showleft');
+      
+        if($('.lwg-prod-window-'+infoarr[i]).length === 0){
+
+          $('.hud-craft-display-'+infoarr[i]).find('.contextual').append('<div style="margin-right:20px;left:10px;line-height: 14px" class="lwg-prod-window-'+infoarr[i]+' leftareainfo"></div>');
+          $('.lwg-prod-window-'+infoarr[i]).append('<p class="salep-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>S:</b> 0.00/s | 0.00/m | 0.00/h</p>');
+          $('.lwg-prod-window-'+infoarr[i]).append('<p class="prodd-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>P:</b> 0.00/s | 0.00/m | 0.00/h</p>');
+        }
+          var num = 0;
+          //produce area
+          let p_secondleft = $("#lwg-prm-"+infoarr[i]+" .p_second").text();
+          let p_minuteleft = $("#lwg-prm-"+infoarr[i]+" .p_minute").text();
+          let p_hourleft = $("#lwg-prm-"+infoarr[i]+" .p_hour").text();
+
+          if(p_secondleft === ''){ p_secondleft = num.toFixed(2); }
+          if(p_minuteleft === ''){ p_minuteleft = num.toFixed(2); }
+          if(p_hourleft === ''){ p_hourleft = num.toFixed(2); }
+
+          $('.prodd-'+infoarr[i]).replaceWith('<p class="prodd-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>P:</b> '+ p_secondleft +'/s | '+ p_minuteleft +'/m | '+ p_hourleft +'/h</p>');
+          //sale area
+          let s_secondleft = $("#lwg-prm-"+infoarr[i]+" .s_second").text();
+          let s_minuteleft = $("#lwg-prm-"+infoarr[i]+" .s_minute").text();
+          let s_hourleft = $("#lwg-prm-"+infoarr[i]+" .s_hour").text();
+
+          if(s_secondleft === ''){ s_secondleft = num.toFixed(2); }
+          if(s_minuteleft === ''){ s_minuteleft = num.toFixed(2); }
+          if(s_hourleft === ''){ s_hourleft = num.toFixed(2); }
+
+          $('.salep-'+infoarr[i]).replaceWith('<p class="salep-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>S:</b> '+ s_secondleft +'/s | '+ s_minuteleft +'/m | '+ s_hourleft +'/h</p>');       
+    } else {
+      $('.lwg-prod-window-'+infoarr[i]).remove();
+      $('.salep-'+infoarr[i]).remove();
+      $('.prodd-'+infoarr[i]).remove();
+      $('.hud-craft-display-'+infoarr[i]).find('.contextual').css("height", "");
+      $('.hud-craft-display-'+infoarr[i]).find('.contextual').addClass('wide30');
+      $('.hud-craft-display-'+infoarr[i]).find('.contextual').find('hud-craft-amount').addClass('showleft');
+    }
+  },1000);
+
+
+
+    setInterval(function(){ 
+          
+          let startLeftinfoBox = JSON.parse(localStorage.getItem("startLeftProdInfo"));
+        if(startLeftinfoBox === false  ){ 
+//          $("div.leftareainfo").remove(); 
+          //$('.hud .contextual').removeClass('fiftypxclass');
+          $('#hud-craft-target').removeClass('pointerev');
+          $("#choseninventory-"+infoarr[i]).hide();
+          $('.lwg-prod-window-'+infoarr[i]).hide();
+          $('.salep-'+infoarr[i]).hide();
+          $('.prodd-'+infoarr[i]).hide();
+          $('.hud-craft-display-'+infoarr[i]).find('.contextual').removeClass('wide30');
+          $('.hud-craft-display-'+infoarr[i]).find('.contextual').find('hud-craft-amount').removeClass('showleft');
+
+        } else { 
+          //$('.hud .contextual').addClass('fiftypxclass');
+          //$('#hud-craft-target').addClass('pointerev');
+          $("#choseninventory-"+infoarr[i]).show();
+          $("#choseninventory-"+infoarr[i]).addClass('pointerev');
+          $(".lwg-prod-window-"+infoarr[i]).addClass('pointerevnone');
+          $('.hud-craft-display-'+infoarr[i]).find('.contextual').addClass('wide30');
+          $('.hud-craft-display-'+infoarr[i]).find('.contextual').find('hud-craft-amount').addClass('showleft');         
+          $('.lwg-prod-window-'+infoarr[i]).show();
+          $('.salep-'+infoarr[i]).show();
+          $('.prodd-'+infoarr[i]).show();
+
+
+
+
+    if (Game.town.GetStoredCrafts()[infoarr[i]] >= 1 && $('#choseninventory-'+infoarr[i]).length == 0 ) {
+
       $('.hud-craft-display-'+infoarr[i]).find('.contextual').prepend('<div id="choseninventory-'+infoarr[i]+'" class="choseninventory-'+infoarr[i]+'" style="width:40px"></div>');
       $('#choseninventory-'+infoarr[i]).append('<input type="checkbox" id="filter-inventory-'+infoarr[i]+'" class="lwg saveButtonl" style="width: 18px; height: 18px;">');
-      setInterval(function(){
-  //      document.getElementById("filter-inventory-"+infoarr[i]).checked
-        
-      if ($("#filter-inventory-"+infoarr[i]+":checked" ).length){ 
-        $('.hud-craft-display-'+infoarr[i]).find('.contextual').css("height", "fit-content");
-        $('.hud-craft-display-'+infoarr[i]).find('.contextual').removeClass('wide30'); 
-        $('.hud-craft-display-'+infoarr[i]).find('.contextual').find('hud-craft-amount').removeClass('showleft');
-        
-          if($('.lwg-prod-window-'+infoarr[i]).length === 0){
-  
-            $('.hud-craft-display-'+infoarr[i]).find('.contextual').append('<div style="margin-right:20px;left:10px;line-height: 14px" class="lwg-prod-window-'+infoarr[i]+' leftareainfo"></div>');
-            $('.lwg-prod-window-'+infoarr[i]).append('<p class="salep-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>S:</b> 0.00/s | 0.00/m | 0.00/h</p>');
-            $('.lwg-prod-window-'+infoarr[i]).append('<p class="prodd-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>P:</b> 0.00/s | 0.00/m | 0.00/h</p>');
-          }
-            var num = 0;
-            //produce area
-            let p_secondleft = $("#lwg-prm-"+infoarr[i]+" .p_second").text();
-            let p_minuteleft = $("#lwg-prm-"+infoarr[i]+" .p_minute").text();
-            let p_hourleft = $("#lwg-prm-"+infoarr[i]+" .p_hour").text();
-  
-            if(p_secondleft === ''){ p_secondleft = num.toFixed(2); }
-            if(p_minuteleft === ''){ p_minuteleft = num.toFixed(2); }
-            if(p_hourleft === ''){ p_hourleft = num.toFixed(2); }
-  
-            $('.prodd-'+infoarr[i]).replaceWith('<p class="prodd-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>P:</b> '+ p_secondleft +'/s | '+ p_minuteleft +'/m | '+ p_hourleft +'/h</p>');
-            //sale area
-            let s_secondleft = $("#lwg-prm-"+infoarr[i]+" .s_second").text();
-            let s_minuteleft = $("#lwg-prm-"+infoarr[i]+" .s_minute").text();
-            let s_hourleft = $("#lwg-prm-"+infoarr[i]+" .s_hour").text();
-  
-            if(s_secondleft === ''){ s_secondleft = num.toFixed(2); }
-            if(s_minuteleft === ''){ s_minuteleft = num.toFixed(2); }
-            if(s_hourleft === ''){ s_hourleft = num.toFixed(2); }
-  
-            $('.salep-'+infoarr[i]).replaceWith('<p class="salep-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>S:</b> '+ s_secondleft +'/s | '+ s_minuteleft +'/m | '+ s_hourleft +'/h</p>');       
-      } else {
+
+        if ($("#filter-inventory-"+infoarr[i]+":checked" ).length){ 
+          $('.hud-craft-display-'+infoarr[i]).find('.contextual').css("height", "fit-content");
+          $('.hud-craft-display-'+infoarr[i]).find('.contextual').removeClass('wide30');
+          $('.hud-craft-display-'+infoarr[i]).find('.contextual').find('hud-craft-amount').removeClass('showleft'); 
+          
+            if($('.lwg-prod-window-'+infoarr[i]).length === 0){
+
+                $('.hud-craft-display-'+infoarr[i]).find('.contextual').append('<div style="margin-right:20px;left:10px;line-height: 14px" class="lwg-prod-window-'+infoarr[i]+' leftareainfo"></div>');
+                $('.lwg-prod-window-'+infoarr[i]).append('<p class="salep-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>S:</b> 0.00/s | 0.00/m | 0.00/h</p>');
+                $('.lwg-prod-window-'+infoarr[i]).append('<p class="prodd-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>P:</b> 0.00/s | 0.00/m | 0.00/h</p>');
+            }
+
+                var num = 0;
+                //produce area
+                let p_secondleft = $("#lwg-prm-"+infoarr[i]+" .p_second").text();
+                let p_minuteleft = $("#lwg-prm-"+infoarr[i]+" .p_minute").text();
+                let p_hourleft = $("#lwg-prm-"+infoarr[i]+" .p_hour").text();
+
+                if(p_secondleft === ''){ p_secondleft = num.toFixed(2); }
+                if(p_minuteleft === ''){ p_minuteleft = num.toFixed(2); }
+                if(p_hourleft === ''){ p_hourleft = num.toFixed(2); }
+
+                $('.prodd-'+infoarr[i]).replaceWith('<p class="prodd-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>P:</b> '+ p_secondleft +'/s | '+ p_minuteleft +'/m | '+ p_hourleft +'/h</p>');
+                //sale area
+                let s_secondleft = $("#lwg-prm-"+infoarr[i]+" .s_second").text();
+                let s_minuteleft = $("#lwg-prm-"+infoarr[i]+" .s_minute").text();
+                let s_hourleft = $("#lwg-prm-"+infoarr[i]+" .s_hour").text();
+          
+                if(s_secondleft === ''){ s_secondleft = num.toFixed(2); }
+                if(s_minuteleft === ''){ s_minuteleft = num.toFixed(2); }
+                if(s_hourleft === ''){ s_hourleft = num.toFixed(2); }
+
+                $('.salep-'+infoarr[i]).replaceWith('<p class="salep-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>S:</b> '+ s_secondleft +'/s | '+ s_minuteleft +'/m | '+ s_hourleft +'/h</p>');       
+      
+     
+      } else { 
         $('.lwg-prod-window-'+infoarr[i]).remove();
         $('.salep-'+infoarr[i]).remove();
         $('.prodd-'+infoarr[i]).remove();
         $('.hud-craft-display-'+infoarr[i]).find('.contextual').css("height", "");
         $('.hud-craft-display-'+infoarr[i]).find('.contextual').addClass('wide30');
         $('.hud-craft-display-'+infoarr[i]).find('.contextual').find('hud-craft-amount').addClass('showleft');
+
+        
       }
-    },1000);
-
-
-
-    setInterval(function(){ 
-          
-        let startLeftinfoBox = JSON.parse(localStorage.getItem("startLeftProdInfo"));
-      if(startLeftinfoBox === false  ){ 
-//          $("div.leftareainfo").remove(); 
-        //$('.hud .contextual').removeClass('fiftypxclass');
-        $('#hud-craft-target').removeClass('pointerev');
-        $("#choseninventory-"+infoarr[i]).hide();
-        $('.lwg-prod-window-'+infoarr[i]).hide();
-        $('.salep-'+infoarr[i]).hide();
-        $('.prodd-'+infoarr[i]).hide();
-        $('.hud-craft-display-'+infoarr[i]).find('.contextual').removeClass('wide30');
-        $('.hud-craft-display-'+infoarr[i]).find('.contextual').find('hud-craft-amount').removeClass('showleft');
-
-      } else { 
-        //$('.hud .contextual').addClass('fiftypxclass');
-        //$('#hud-craft-target').addClass('pointerev');
-        $("#choseninventory-"+infoarr[i]).show();
-        $("#choseninventory-"+infoarr[i]).addClass('pointerev');
-        $(".lwg-prod-window-"+infoarr[i]).addClass('pointerevnone');
-        $('.hud-craft-display-'+infoarr[i]).find('.contextual').addClass('wide30');
-        $('.hud-craft-display-'+infoarr[i]).find('.contextual').find('hud-craft-amount').addClass('showleft');         
-        $('.lwg-prod-window-'+infoarr[i]).show();
-        $('.salep-'+infoarr[i]).show();
-        $('.prodd-'+infoarr[i]).show();
-
-
-
-
-        if (Game.town.GetStoredCrafts()[infoarr[i]] >= 1 && $('#choseninventory-'+infoarr[i]).length == 0 ) {
-
-            $('.hud-craft-display-'+infoarr[i]).find('.contextual').prepend('<div id="choseninventory-'+infoarr[i]+'" class="choseninventory-'+infoarr[i]+'" style="width:40px"></div>');
-            $('#choseninventory-'+infoarr[i]).append('<input type="checkbox" id="filter-inventory-'+infoarr[i]+'" class="lwg saveButtonl" style="width: 18px; height: 18px;">');
-      
-              if ($("#filter-inventory-"+infoarr[i]+":checked" ).length){ 
-                $('.hud-craft-display-'+infoarr[i]).find('.contextual').css("height", "fit-content");
-                $('.hud-craft-display-'+infoarr[i]).find('.contextual').removeClass('wide30');
-                $('.hud-craft-display-'+infoarr[i]).find('.contextual').find('hud-craft-amount').removeClass('showleft'); 
-                
-                  if($('.lwg-prod-window-'+infoarr[i]).length === 0){
-      
-                      $('.hud-craft-display-'+infoarr[i]).find('.contextual').append('<div style="margin-right:20px;left:10px;line-height: 14px" class="lwg-prod-window-'+infoarr[i]+' leftareainfo"></div>');
-                      $('.lwg-prod-window-'+infoarr[i]).append('<p class="salep-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>S:</b> 0.00/s | 0.00/m | 0.00/h</p>');
-                      $('.lwg-prod-window-'+infoarr[i]).append('<p class="prodd-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>P:</b> 0.00/s | 0.00/m | 0.00/h</p>');
-                  }
-      
-                      var num = 0;
-                      //produce area
-                      let p_secondleft = $("#lwg-prm-"+infoarr[i]+" .p_second").text();
-                      let p_minuteleft = $("#lwg-prm-"+infoarr[i]+" .p_minute").text();
-                      let p_hourleft = $("#lwg-prm-"+infoarr[i]+" .p_hour").text();
-      
-                      if(p_secondleft === ''){ p_secondleft = num.toFixed(2); }
-                      if(p_minuteleft === ''){ p_minuteleft = num.toFixed(2); }
-                      if(p_hourleft === ''){ p_hourleft = num.toFixed(2); }
-      
-                      $('.prodd-'+infoarr[i]).replaceWith('<p class="prodd-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>P:</b> '+ p_secondleft +'/s | '+ p_minuteleft +'/m | '+ p_hourleft +'/h</p>');
-                      //sale area
-                      let s_secondleft = $("#lwg-prm-"+infoarr[i]+" .s_second").text();
-                      let s_minuteleft = $("#lwg-prm-"+infoarr[i]+" .s_minute").text();
-                      let s_hourleft = $("#lwg-prm-"+infoarr[i]+" .s_hour").text();
-                
-                      if(s_secondleft === ''){ s_secondleft = num.toFixed(2); }
-                      if(s_minuteleft === ''){ s_minuteleft = num.toFixed(2); }
-                      if(s_hourleft === ''){ s_hourleft = num.toFixed(2); }
-      
-                      $('.salep-'+infoarr[i]).replaceWith('<p class="salep-'+infoarr[i]+'" style="text-align: left;font-size:18px;"><b>S:</b> '+ s_secondleft +'/s | '+ s_minuteleft +'/m | '+ s_hourleft +'/h</p>');       
-            
-           
-            } else { 
-              $('.lwg-prod-window-'+infoarr[i]).remove();
-              $('.salep-'+infoarr[i]).remove();
-              $('.prodd-'+infoarr[i]).remove();
-              $('.hud-craft-display-'+infoarr[i]).find('.contextual').css("height", "");
-              $('.hud-craft-display-'+infoarr[i]).find('.contextual').addClass('wide30');
-              $('.hud-craft-display-'+infoarr[i]).find('.contextual').find('hud-craft-amount').addClass('showleft');
-      
-              
-            }
-        }     
-      }
-      },1000);
-      }
-      const foozy = document.querySelector('#hud-craft-target')  
+  }     
+}
+},1000);
+}
+const foozy = document.querySelector('#hud-craft-target')  
       foozy.addEventListener('wheel', (event) => { event.stopPropagation();});
       foozy.addEventListener('mousedown', (event) => { event.stopPropagation();});
       foozy.addEventListener('mouseup', (event) => { event.stopPropagation();}); 
@@ -1171,87 +1202,6 @@ for (var i = 0, len = localStorage.length; i < len; i++) {
 },1000);
 }
  // end of new left sidebar monitor
-async function CheckComplete() {  
-
-var AutoCompleteCheckBox = document.getElementById("auto-complete");
-if (AutoCompleteCheckBox.checked == true) {
-  let ConstructionSiteArray = Object.values(Game.town.objectDict).filter(o => o.type === 'Construction_Site' );
-  for(let i=0, n=ConstructionSiteArray.length; i < n; i++){
-      if(ConstructionSiteArray[i].logicObject.data.state == "Complete"){
-          if( Game.objectData[ConstructionSiteArray[i].logicObject.data.type].LaborCost >= 0){
-                   ConstructionSiteArray[i].logicObject.OnTapped();
-                  $('.menu').find('.menu-craft').css("display", "none");
-                  $('.menu').find('.menu-sell').css("display", "none");
-                  $('.menu').find('.menu-flush').css("display", "none");
-                  $('.menu').find('.menu-rotate').css("display", "none");
-                  $('.menu').find('.menu-nuketown').css("display", "none");
-                  $('.menu').find('.menu-jimmy').css("display", "none");
-                  $('.menu').find('.menu-jimmy-cancel').css("display", "none");
-                  $('.menu').find('.menu-progress').css("display", "none");
-                  $('.menu').find('.menu-returntree').css("display", "none");
-                  $('.menu').find('.npc').css("display", "none");
-                  $('.menu').find('.menu-remove').css("display", "none");
-                  $('.menu').find('.menu-upgrade').css("display", "none");      
-          }
-      }
-      
-      }
-}setTimeout(CheckComplete, 2000);
-}
-
-async function CheckAllskinsenabled() {  
-
-  var SkinsCompleteCheckBox = document.getElementById("start-skins-settings");
-  if (SkinsCompleteCheckBox.checked == true) {
-    let tempskins = INVENTORY.skins
-    tempskins.forEach((n=>{
-      n.skin === "Mirandus" && n.active != true && (n.active = true,
-          Game.town.setSkin(n.object.Name, true ? n.skin : null, !1))
-        })),
-        true ? API.setUserData("skinSettings", SKINS) : API.setUserData("skinSettings", {})
-
-  }setTimeout(CheckAllskinsenabled, 5000);
-  }
-
-
-//start money
-//  async function SetStartMoney() {
-//    await WaitForElement('.hud-currency');
-//    var startValue = parseFloat($('.hud-currency').html().replace(/,/g, ''));   
-//    localStorage.setItem("startingMoney", startValue);
-//   };
-//
-//   var num = 0;
-//    setInterval(function(){
-//      
-//      if ( $('.lwg-moneygain').length > 0){
-//        $('.lwg-moneygain').remove;
-//      }
-//      else
-//      {
-//      $('.cash').append('<p class="lwg-moneygain" style="text-align: left;font-size:18px;"> 0/s | 0/m | 0/h</p>');
-//      }
-//      let laborcost = parseFloat($('.hud-labor-costs').text().replace(/,/g, ''));
-//      let startingMoney = localStorage.getItem("startingMoney");
-//      let newmoney = parseFloat($('.hud-currency').text().replace(/,/g, ''));
-//      let calculateexpenses = (+startingMoney + +laborcost);
-//      let diffmoney = Math.floor(newmoney - calculateexpenses);
-//
-//      //let d = new Date(diff);
-//
-//      var moneysecond = (diffmoney / 60).toFixed(2);
-//      var moneyminute = (diffmoney).toFixed(2);
-//      var moneyhour = (diffmoney * 60).toFixed(2); 
-//
-//      if(moneysecond === ''){ moneysecond = num; }
-//      if(moneyminute === ''){ moneyminute = num; }
-//      if(moneyhour === ''){ moneyhour = num; }
-//    
-//
-//      $('.lwg-moneygain').replaceWith('<p class="lwg-moneygain" style="text-align: left;font-size:18px;"><b>M:</b> '+ moneysecond +'/s | '+ moneyminute +'/m | '+ moneyhour +'/h</p>');
-//    },1000);
-// end money
-
 
 async function ActivateAutoSell() {   
     let autoSellStatus = document.createElement('div');
@@ -1267,10 +1217,6 @@ async function ActivateAutoSell() {
     document.querySelector('.hud').prepend(autoSellStatus);
     CheckCrafts();
     GetLeftDataInfo();
-//    SetStartMoney(); 
-//    ChkLeftboxes();  
-    CheckComplete();
-    CheckAllskinsenabled();
   }
 
 async function lwgActivateProductionMonitor(){
@@ -1307,7 +1253,7 @@ async function lwgActivateProductionMonitor(){
      * Update item in lwglist
      * @param  {[type]} litem
      */
-     function lwgupdateItem(litem){
+    function lwgupdateItem(litem){
 
         console.log( litem +" added");
 
@@ -1331,358 +1277,352 @@ async function lwgActivateProductionMonitor(){
      * Add new item to tracked lwglist
      * @param  {[type]} litem
      */
-     async function lwgnewItem(litem){
+    async function lwgnewItem(litem){
 
-        //       console.log("lwgnewItem: " + litem);
-       
-               // add new default litem
-               lwglist[litem] = {
-                   lwgcount: 1,
-                   lwgfirst: Date.now(),
-                   lwgsecond: 0,
-                   lwgminute: 0,
-                   lwghour: 0
-               };
-       
-               // row's id
-               let id = "lwg-prm-" + litem;
-       
-               // add new row to table
-       
-       
-               let html = "<tr id='" + id + "'>";
-               html += "<th rowspan='2' class='item'>" + litem + "</th>";  
-               html += "<td class='s_item'><b>S:</b></td>";
-               html += "<td class='s_itemt' style='font-weight:bold'></td>";
-               html += "<td class='s_second'></td>";
-               html += "<td class='s_minute'></td>";
-               html += "<td class='s_hour'></td>";
-                 html += "</tr>";
-                 html += "<tr id='" + id + "'>";
-                 html += "<td class='p_item' style='border-bottom:1px solid #2e435c;'><b>P:</b></td>";
-                 html += "<td class='p_itemt' style='font-weight:bold;border-bottom:1px solid #2e435c;'></td>";
-                 html += "<td class='p_second' style='border-bottom:1px solid #2e435c;'></td>";
-                 html += "<td class='p_minute' style='border-bottom:1px solid #2e435c;'></td>";
-                 html += "<td class='p_hour' style='border-bottom:1px solid #2e435c;'></td>";
-                 html += "</tr>";
-       
-       
-               $('#lwg-prm-table').append(html);
-       
-               // clone image when available
-               let image = await lwgcloneImageWhenAvailable('.hud-craft-display-' + litem);
-       
-               
-       
-               // copy image into my table
-               $('#' + id + ' .item').html("").append(image);
-               $('#' + id + ' .hud-craft-icon').css("width", 24); 
-       
-       
-               let sale_second = 0;
-               let sale_minute = 0;
-               let sale_hour = 0;
-               let sale_count = 0;
-       
-       
-               $("#lwg-prm-"  + litem +  " .s_second").html(sale_second.toFixed(2));
-               $("#lwg-prm-"  + litem +  " .s_minute").html(sale_minute.toFixed(2));
-               $("#lwg-prm-"  + litem +  " .s_hour").html(sale_hour.toFixed(2));
-               $("#lwg-prm-"  + litem +  " .s_itemt").html(sale_count);
+ //       console.log("lwgnewItem: " + litem);
+
+        // add new default litem
+        lwglist[litem] = {
+            lwgcount: 1,
+            lwgfirst: Date.now(),
+            lwgsecond: 0,
+            lwgminute: 0,
+            lwghour: 0
+        };
+
+        // row's id
+        let id = "lwg-prm-" + litem;
+
+        // add new row to table
+
+
+        let html = "<tr id='" + id + "'>";
+        html += "<th rowspan='2' class='item'>" + litem + "</th>";  
+        html += "<td class='s_item'><b>S:</b></td>";
+        html += "<td class='s_itemt' style='font-weight:bold'></td>";
+        html += "<td class='s_second'></td>";
+        html += "<td class='s_minute'></td>";
+        html += "<td class='s_hour'></td>";
+          html += "</tr>";
+          html += "<tr id='" + id + "'>";
+          html += "<td class='p_item' style='border-bottom:1px solid #2e435c;'><b>P:</b></td>";
+          html += "<td class='p_itemt' style='font-weight:bold;border-bottom:1px solid #2e435c;'></td>";
+          html += "<td class='p_second' style='border-bottom:1px solid #2e435c;'></td>";
+          html += "<td class='p_minute' style='border-bottom:1px solid #2e435c;'></td>";
+          html += "<td class='p_hour' style='border-bottom:1px solid #2e435c;'></td>";
+          html += "</tr>";
+
+
+        $('#lwg-prm-table').append(html);
+
+        // clone image when available
+        let image = await lwgcloneImageWhenAvailable('.hud-craft-display-' + litem);
+
         
-           }
-       
-           /**
-            * Update the UI
-            * @param  {[type]} litem
-            */
-           function lwgupdateUI(litem){
-               
-       //        console.log("lwgupdateUI: " + litem);
-       
-               let lwgcount = lwglist[litem].lwgcount;
-               let lwgsecond = lwglist[litem].lwgsecond.toFixed(2);
-               let lwgminute = lwglist[litem].lwgminute.toFixed(2);
-               let lwghour = lwglist[litem].lwghour.toFixed(2);
-       
-               let p_secondx = lwgsecond;
-               let p_minutex = lwgminute;
-               let p_hourx = lwghour;
-       
-               // update ui
-               
-               $("#lwg-prm-" + litem + " .p_second").html(p_secondx);
-               $("#lwg-prm-" + litem + " .p_minute").html(p_minutex);
-               $("#lwg-prm-" + litem + " .p_hour").html(p_hourx);
-               $("#lwg-prm-" + litem + " .p_itemt").html(lwgcount)     
+
+        // copy image into my table
+        $('#' + id + ' .item').html("").append(image);
+        $('#' + id + ' .hud-craft-icon').css("width", 24); 
+
+
+        let sale_second = 0;
+        let sale_minute = 0;
+        let sale_hour = 0;
+        let sale_count = 0;
+
+
+        $("#lwg-prm-"  + litem +  " .s_second").html(sale_second.toFixed(2));
+        $("#lwg-prm-"  + litem +  " .s_minute").html(sale_minute.toFixed(2));
+        $("#lwg-prm-"  + litem +  " .s_hour").html(sale_hour.toFixed(2));
+        $("#lwg-prm-"  + litem +  " .s_itemt").html(sale_count);
+ 
+    }
+
+    /**
+     * Update the UI
+     * @param  {[type]} litem
+     */
+    function lwgupdateUI(litem){
         
-           }
-       
-           /**
-            * Add elements to UI
-            */
-            async function lwgstartUI(){
-       
-               lwgaddTable();
-               lwgaddoverlay();
-               lwgaddRestartButton();
-               lwgaddClock();
-                   // fix for zoom in out on scroll     
-                   await WaitForElement('.production-right');    
-                   const lwgrightfooz = document.querySelector('.production-right')  
-                   lwgrightfooz.addEventListener('wheel', (event) => { event.stopPropagation();});
-                   lwgrightfooz.addEventListener('mousedown', (event) => { event.stopPropagation();});
-                   lwgrightfooz.addEventListener('mouseup', (event) => { event.stopPropagation();});      
-       
-                   await WaitForElement('#lwg-right-resetbox');    
-                   const lwgrightfoozreset = document.querySelector('#lwg-right-resetbox')  
-                   lwgrightfoozreset.addEventListener('wheel', (event) => { event.stopPropagation();});
-                   lwgrightfoozreset.addEventListener('mousedown', (event) => { event.stopPropagation();});
-                   lwgrightfoozreset.addEventListener('mouseup', (event) => { event.stopPropagation();});   
-       
-       
-           
-                 //Show hide right side area production monitor area
-                 await WaitForElement('#production-right');
-                 await WaitForElement('#lwg-right-resetbox');
-                 var productionlem = document.getElementById('production-right')
-                 var productionlemreset = document.getElementById('lwg-right-resetbox'),
-                 productionBox = document.getElementById('side-production-settings');
-                 productionBox.checked = JSON.parse(localStorage.getItem("startSideProduction"));
-                 productionBox.onchange = function productionlopc() {
-                   productionlem.style.display = this.checked ? 'block' : 'none';
-                   productionlemreset.style.display = this.checked ? 'block' : 'none';
-                 };
-                 productionBox.onchange();
-           
-           
-           
-                 //Show hide right side area production monitor scrollbar area
-                 await WaitForElement('#production-right');
-                 var productionlemscrollbar = document.getElementById('production-right'),
-                 productionBoxscrollbar = document.getElementById('side-production-settings-scrollbar');
-                 productionBoxscrollbar.checked = JSON.parse(localStorage.getItem("startSideProductionScrollbar"));
-                 productionBoxscrollbar.onchange = function productionscrollbarlopc() {
-                   productionlemscrollbar.style.maxHeight = this.checked ? '332px' : 'none';
-                   productionlemscrollbar.style.overflowY = this.checked ? 'scroll' : 'hidden';
-                 };
-                 productionBoxscrollbar.onchange();
-           
-                 
+//        console.log("lwgupdateUI: " + litem);
+
+        let lwgcount = lwglist[litem].lwgcount;
+        let lwgsecond = lwglist[litem].lwgsecond.toFixed(2);
+        let lwgminute = lwglist[litem].lwgminute.toFixed(2);
+        let lwghour = lwglist[litem].lwghour.toFixed(2);
+
+        let p_secondx = lwgsecond;
+        let p_minutex = lwgminute;
+        let p_hourx = lwghour;
+
+        // update ui
+        
+        $("#lwg-prm-" + litem + " .p_second").html(p_secondx);
+        $("#lwg-prm-" + litem + " .p_minute").html(p_minutex);
+        $("#lwg-prm-" + litem + " .p_hour").html(p_hourx);
+        $("#lwg-prm-" + litem + " .p_itemt").html(lwgcount)     
+ 
+    }
+
+    /**
+     * Add elements to UI
+     */
+     async function lwgstartUI(){
+
+        lwgaddTable();
+        lwgaddoverlay();
+        lwgaddRestartButton();
+        lwgaddClock();
+            // fix for zoom in out on scroll     
+            await WaitForElement('.production-right');    
+            const lwgrightfooz = document.querySelector('.production-right')  
+            lwgrightfooz.addEventListener('wheel', (event) => { event.stopPropagation();});
+            lwgrightfooz.addEventListener('mousedown', (event) => { event.stopPropagation();});
+            lwgrightfooz.addEventListener('mouseup', (event) => { event.stopPropagation();});      
+
+            await WaitForElement('#lwg-right-resetbox');    
+            const lwgrightfoozreset = document.querySelector('#lwg-right-resetbox')  
+            lwgrightfoozreset.addEventListener('wheel', (event) => { event.stopPropagation();});
+            lwgrightfoozreset.addEventListener('mousedown', (event) => { event.stopPropagation();});
+            lwgrightfoozreset.addEventListener('mouseup', (event) => { event.stopPropagation();});   
+
+
+    
+          //Show hide right side area production monitor area
+          await WaitForElement('#production-right');
+          await WaitForElement('#lwg-right-resetbox');
+          var productionlem = document.getElementById('production-right')
+          var productionlemreset = document.getElementById('lwg-right-resetbox'),
+          productionBox = document.getElementById('side-production-settings');
+          productionBox.checked = JSON.parse(localStorage.getItem("startSideProduction"));
+          productionBox.onchange = function productionlopc() {
+            productionlem.style.display = this.checked ? 'block' : 'none';
+            productionlemreset.style.display = this.checked ? 'block' : 'none';
+          };
+          productionBox.onchange();
+    
+    
+    
+          //Show hide right side area production monitor scrollbar area
+          await WaitForElement('#production-right');
+          var productionlemscrollbar = document.getElementById('production-right'),
+          productionBoxscrollbar = document.getElementById('side-production-settings-scrollbar');
+          productionBoxscrollbar.checked = JSON.parse(localStorage.getItem("startSideProductionScrollbar"));
+          productionBoxscrollbar.onchange = function productionscrollbarlopc() {
+            productionlemscrollbar.style.maxHeight = this.checked ? '332px' : 'none';
+            productionlemscrollbar.style.overflowY = this.checked ? 'scroll' : 'hidden';
+          };
+          productionBoxscrollbar.onchange();
+    
           
-             }
-       
-       
-           
-       
-           /**
-            * Run!
-            */
-            function lwgrun() {
-
-                lwgstartUI();
-         
-                
-        
-                // making a new class....
-                class TrackUnitDeliverOutputTask extends UnitDeliverOutputTask {
-        
-                    // overwrite the onArrive functionality
-                    onArrive() {
-        
-                        // make sure to do the original onArrive functionality
-                        super.onArrive();
-        
-                        // let trackedItem = trackedItems.find(item => item.item.toUpperCase() == this.craft.toUpperCase())
-                        let litem = this.craft;
-        
-                        // if we are already tracking the litem, update its values
-                        if(lwglist[litem]){
-                            lwgupdateItem(litem);
-                            
-                        // else make it as a new litem
-                        }else{
-                            lwgnewItem(litem);
-                            
-                        }
-        
-                        // then update the ui
-                        lwgupdateUI(litem);
-                  }
-        
-                }
-        
-                // not gonna lie... not too sure what this is doing
-                let origfindDeliverOutputTask = TS_UnitLogic.prototype.findDeliverOutputTask;
-                TS_UnitLogic.prototype.findDeliverOutputTask = function(t) {
-        
-                    // this method gets called when someone picks up something or drops it off?
-                    let origReturn = origfindDeliverOutputTask.call(this, t);
-                    return origReturn ? new TrackUnitDeliverOutputTask(origReturn.unit,origReturn.targetObject,t) : null
-        
-                }
-        
-                
-        
-            }
-        
-            /**
-             * Add table HTML
-             */
-             function lwgaddTable(){
-                let html = "<div id='production-right' class='production-right' style='max-height:332px;overflow-y: scroll;margin-right:10px;margin-top:5px;'>";
-                        html += "<table id='lwg-prm-table'>";
-                            html += "<tr>";
-                                html += "<td>Item</td>";
-                                html += "<td></td>";
-                                html += "<td></td>";
-                                html += "<td>sec</td>";
-                                html += "<td>min</td>";
-                                html += "<td>hour</td>";
-                            html += "</tr>";
-                        html += "</table>";
-                    html += "</div>";
-                    $('.hud-right').after(html);
-            
-                    // add some simple css to the table
-                    $("#lwg-prm-table").css({
-                        'border':'4px solid #ccc',
-                        'background-color':'#fff',
-                        'width':'99%',
-                        'margin-top':'2px',
-                        'border-radius':'5px',
-                        'opacity':'0.8',
-                        'border-spacing':'5px',
-                        'line-height' :'12px',
-                        'border-collapse':'separate',
-                    });
-            
-                }
-            
-            
-                /**
-                 * Add   Text
-                 */
-                function lwgaddoverlay(){
-                  let htmlzx = "<div id='overlay' style='display:none;'>";
-                      htmlzx += "<div id='calceltext'><b>User Action on Cancel Trade Button disabled Auto-Sell</b><br><span style='font-size:22px;'>***Please open menu and activate it again when done with sale settings***</span></br><span style='font-size:16px;color:yellow;font-weight:bold;'>click anywhere to close this message</span></br><div><span id='timer'><span id='time'>15</span> Seconds remaining until auto-sell restarts</span></div></div>"
-                      $('body').after(htmlzx);
-              
-                  }
-                // Toggle div display
-                await WaitForElement('#overlay');
-                $("#overlay").click(function(){
-                  crossClicked = true;
-                  $("#overlay").hide();
-              });
-                   
+   
+      }
 
 
+    
 
+    /**
+     * Run!
+     */
+    function lwgrun() {
 
+        lwgstartUI();
+ 
+        
 
+        // making a new class....
+        class TrackUnitDeliverOutputTask extends UnitDeliverOutputTask {
 
-            
-                /**
-                 * Add restart button HTML
-                 */
-                function lwgaddRestartButton(){
-            
-                    // add button with listener
-                    let html = '<div id="lwg-right-resetbox"><button id="lwg-prm-reset"/>Reset</button></div>';
-                    $('#production-right').after(html);
-            
-                    // bind function
-                    $("#lwg-prm-reset").click(lwgresetList);
-            
-                    // add some simple css to the button
-                    $("#lwg-prm-reset").css({
-                        'width':'92%',
-                        'padding':'10px',
-                        'margin-top':'10px',
-                        'border-radius':'5px',
-                        'border':'solid 1px #ccc'
-                    });
-            
-            
+            // overwrite the onArrive functionality
+            onArrive() {
+
+                // make sure to do the original onArrive functionality
+                super.onArrive();
+
+                // let trackedItem = trackedItems.find(item => item.item.toUpperCase() == this.craft.toUpperCase())
+                let litem = this.craft;
+
+                // if we are already tracking the litem, update its values
+                if(lwglist[litem]){
+                    lwgupdateItem(litem);
+                    
+                // else make it as a new litem
+                }else{
+                    lwgnewItem(litem);
                     
                 }
-            
-                /**
-                 * Add on screen clock to the reset button
-                 */
-                function lwgaddClock(){
-            
-                    // don't do any on screen clock if time is set to false
-                    if(lwgtimeStart == false){
-                        return;
-                    }
-            
-                    // start interval if not already started
-                    if(lwgtimeStart == true){
-            
-                        // update lwgtimeStart
-                        lwgtimeStart = Date.now();
-            
-                        // every 1 second, update the on screen timer
-                        // Note: this might not be the most efficient way to do this
-                        setInterval(function(){
-            
-                            let lwgdiff = new Date() - lwgtimeStart;
-                            let lwgd = new Date(lwgdiff);
-                            var diffInHours = Math.floor(Math.abs(lwgdiff) / 36e5);
-                            let lwghours = lwgformatTwoDigits(diffInHours); //fix for 00 display
-                            let lwgminutes = lwgformatTwoDigits(lwgd.getMinutes());
-                            let lwgseconds = lwgformatTwoDigits(lwgd.getSeconds());
-                            let lwgstring = "Reset : " + lwghours + ":" + lwgminutes + ":" + lwgseconds;
-            
-                            $('#lwg-prm-reset').html(lwgstring);
-                      
-                        },1000);
-            //            console.clear();
-                        console.log(Date.now() + ' ---===ACTIVATING LWG TS PLAYER v.'+versionLWG+' ===---');
-            
-                    }else{
-            
-                        // update lwgtimeStart
-                        lwgtimeStart = Date.now();
-            
-                    }
-            
-                }
-            
-                ////////////
-                // UTLITY //
-                ////////////
-            
-                /**
-                 * Clone and return image when available
-                 * @param  {[type]} selector [description]
-                 */
-                async function lwgcloneImageWhenAvailable(selector) {
-            
-                    while (!$(selector).find('img').length) {
-                        await new Promise( r => setTimeout(r, 1000) )
-                    }
-            
-                    let lwgimage = $(selector).find('img').clone();
-            
-                    return lwgimage;
-            
-                }
-            
-            
-                /**
-                 * This method helps to format a string of two digits.
-                 * In case the given number is smaller than 10, it will add a leading zero,
-                 * e.g. 08 instead of 8
-                 * @param {Number} n - a number with one or two digits
-                 * @returns {String} String with two digits
-                 */
-                function lwgformatTwoDigits(n) {
-                    return n < 10 ? '0' + n : n;
-                }
-            }
+
+                // then update the ui
+                lwgupdateUI(litem);
+          }
+
+        }
+
+        // not gonna lie... not too sure what this is doing
+        let origfindDeliverOutputTask = TS_UnitLogic.prototype.findDeliverOutputTask;
+        TS_UnitLogic.prototype.findDeliverOutputTask = function(t) {
+
+            // this method gets called when someone picks up something or drops it off?
+            let origReturn = origfindDeliverOutputTask.call(this, t);
+            return origReturn ? new TrackUnitDeliverOutputTask(origReturn.unit,origReturn.targetObject,t) : null
+
+        }
+
+        
+
+    }
+
+    /**
+     * Add table HTML
+     */
+    function lwgaddTable(){
+    let html = "<div id='production-right' class='production-right' style='max-height:332px;overflow-y: scroll;margin-right:10px;margin-top:5px;'>";
+            html += "<table id='lwg-prm-table'>";
+                html += "<tr>";
+                    html += "<td>Item</td>";
+                    html += "<td></td>";
+                    html += "<td></td>";
+                    html += "<td>sec</td>";
+                    html += "<td>min</td>";
+                    html += "<td>hour</td>";
+                html += "</tr>";
+            html += "</table>";
+        html += "</div>";
+        $('.hud-right').after(html);
+
+        // add some simple css to the table
+        $("#lwg-prm-table").css({
+            'border':'4px solid #ccc',
+            'background-color':'#fff',
+            'width':'99%',
+            'margin-top':'2px',
+            'border-radius':'5px',
+            'opacity':'0.8',
+            'border-spacing':'5px',
+            'line-height' :'12px',
+            'border-collapse':'separate',
+        });
+
+    }
+
+
+    /**
+     * Add Overlay Text
+     */
+     function lwgaddoverlay(){
+      let htmlzx = "<div id='overlay' style='display:none;'>";
+          htmlzx += "<div id='calceltext'><b>User Action on Cancel Trade Button disabled Auto-Sell</b><br><span style='font-size:22px;'>***Please open menu and activate it again when done with sale settings***</span></br><span style='font-size:16px;color:yellow;font-weight:bold;'>click anywhere to close this message</span></br><div><span id='timer'><span id='time'>15</span> Seconds remaining until auto-sell restarts</span></div></div>"
+          $('body').after(htmlzx);
+  
+      }
+    // Toggle div display
+    await WaitForElement('#overlay');
+    $("#overlay").click(function(){
+      crossClicked = true;
+      $("#overlay").hide();
+  });
+
+
+    /**
+     * Add restart button HTML
+     */
+    function lwgaddRestartButton(){
+
+        // add button with listener
+        let html = '<div id="lwg-right-resetbox"><button id="lwg-prm-reset"/>Reset</button></div>';
+        $('#production-right').after(html);
+
+        // bind function
+        $("#lwg-prm-reset").click(lwgresetList);
+
+        // add some simple css to the button
+        $("#lwg-prm-reset").css({
+            'width':'92%',
+            'padding':'10px',
+            'margin-top':'10px',
+            'border-radius':'5px',
+            'border':'solid 1px #ccc'
+        });
+
+
+        
+    }
+
+    /**
+     * Add on screen clock to the reset button
+     */
+    function lwgaddClock(){
+
+        // don't do any on screen clock if time is set to false
+        if(lwgtimeStart == false){
+            return;
+        }
+
+        // start interval if not already started
+        if(lwgtimeStart == true){
+
+            // update lwgtimeStart
+            lwgtimeStart = Date.now();
+
+            // every 1 second, update the on screen timer
+            // Note: this might not be the most efficient way to do this
+            setInterval(function(){
+
+                let lwgdiff = new Date() - lwgtimeStart;
+                let lwgd = new Date(lwgdiff);
+                var diffInHours = Math.floor(Math.abs(lwgdiff) / 36e5);
+                let lwghours = lwgformatTwoDigits(diffInHours); //fix for 00 display
+                let lwgminutes = lwgformatTwoDigits(lwgd.getMinutes());
+                let lwgseconds = lwgformatTwoDigits(lwgd.getSeconds());
+                let lwgstring = "Reset : " + lwghours + ":" + lwgminutes + ":" + lwgseconds;
+
+                $('#lwg-prm-reset').html(lwgstring);
+          
+            },1000);
+//            console.clear();
+            console.log(Date.now() + ' ---===ACTIVATING LWG TS PLAYER v.'+versionLWG+' ===---');
+
+        }else{
+
+            // update lwgtimeStart
+            lwgtimeStart = Date.now();
+
+        }
+
+    }
+
+    ////////////
+    // UTLITY //
+    ////////////
+
+    /**
+     * Clone and return image when available
+     * @param  {[type]} selector [description]
+     */
+    async function lwgcloneImageWhenAvailable(selector) {
+
+        while (!$(selector).find('img').length) {
+            await new Promise( r => setTimeout(r, 1000) )
+        }
+
+        let lwgimage = $(selector).find('img').clone();
+
+        return lwgimage;
+
+    }
+
+
+    /**
+     * This method helps to format a string of two digits.
+     * In case the given number is smaller than 10, it will add a leading zero,
+     * e.g. 08 instead of 8
+     * @param {Number} n - a number with one or two digits
+     * @returns {String} String with two digits
+     */
+    function lwgformatTwoDigits(n) {
+        return n < 10 ? '0' + n : n;
+    }
+}
 
 
         //**product rate in game  Anfang**//
@@ -1725,7 +1665,7 @@ async function lwgActivateProductionMonitor(){
             hudRight.insertBefore(scoresContainer, hudRight.querySelector('.right-hud').nextSibling);
             CheckPlayerScores();
     //hover function
-            $('#reset-scores').hover(function() {
+            $('#reset-scores').hover(function () {
                 $(this).css("background", "#fff");
             }, function () {
                 $(this).css("background", "#00000000");
@@ -1769,127 +1709,127 @@ async function lwgActivateProductionMonitor(){
 
 // GROOVY POINTS/H LEADERBOARD
 function LoadLWGLeaderboard() {
-    document.querySelector('.leaderboard').addEventListener('click', e => {
-        if (e.target.closest('.player')) {
-            let targetTownName = e.target.closest('.player').querySelector('.name').innerHTML;
-            let targetTown = Object.values(Game.world.towns).filter(function(el){return el.name == targetTownName})[0];
-            let worldPos = Game.world.GetWorldPositionFromMapIndex(targetTown.x, targetTown.y);
-            Game.app.root.findByName('CameraWorld').script.cameraController.SetPosition(worldPos.x, worldPos.z);
-            document.querySelector('.leaderboard .close-button').click();
-            if (HUD.instance && HUD.instance.activeView == 'Town') {Game.app.fire('SetWorldView')};
-            Game.app.root.findByName('CameraWorld').script.cameraController.Tap({x: (window.innerWidth/2), y: (window.innerHeight/2)});
-        }
-    });
-  }
-  
-  async function CheckLWGLeaderboard() {
-    API.scoreLeaderboard(0, 5000).then(leaders=>{
-        for (let i=0, n=leaders.length; i < n; i++) {
-            let tracker = leaderTracker.find(leader => leader.userId == leaders[i].userId)
-            if (tracker) {
-                let timeDiff = Date.now() - tracker.startTime;
-                tracker.pph = (leaders[i].score - tracker.startScore) / (timeDiff / 3600000);
-                tracker.rank = leaders[i].rank;
-                let lastHrDiff = Date.now() - tracker.lastHrTime;
-                if (lastHrDiff > 3600000) {
-                    tracker.lastHrpph = (leaders[i].score - tracker.lastHrScore) / (lastHrDiff / 3600000);
-                    tracker.lastHrTime = Date.now();
-                    tracker.lastHrScore = leaders[i].score;
-                }
-            } else {
-                leaderTracker.push({userId: leaders[i].userId, name: leaders[i].name, rank: leaders[i].rank, startTime: Date.now(), startScore: leaders[i].score, pph: 0, lastHrTime: Date.now(), lastHrScore: leaders[i].score, lastHrpph: 0});
-            }
-        }
-        InsertLWGTrackedLeaders()
-        setTimeout(CheckLWGLeaderboard, 60000);
-    });
-  }
-  
-  function InsertLWGTrackedLeaders() {
-    for (let i=0, n=leaderTracker.length; i < n; i++) {
-        if (document.querySelector('.leaderboard-portrait-' + leaderTracker[i].userId)) {
-            let trackedLeaderElem = document.querySelector('#tracked-leader-' + leaderTracker[i].userId);
-            let trackedLeaderText;
-            if (!trackedLeaderElem) {
-                trackedLeaderElem = document.createElement('div');
-                trackedLeaderElem.id = 'tracked-leader-' + leaderTracker[i].userId;
-                trackedLeaderText = document.createElement('div');
-                trackedLeaderText.classList.add('bank');
-                trackedLeaderText.style.fontSize = '18px';
-                trackedLeaderText.style.padding = '4px 8px';
-                trackedLeaderElem.appendChild(trackedLeaderText);
-                let targetLeader = document.querySelector('.leaderboard-portrait-' + leaderTracker[i].userId)
-                targetLeader.insertBefore(trackedLeaderElem, targetLeader.querySelector('.score'));
-            } else {
-                trackedLeaderText = trackedLeaderElem.querySelector('div');
-            }
-            let timeDiff = Date.now() - leaderTracker[i].startTime;
-            trackedLeaderText.innerHTML = leaderTracker[i].pph.toLocaleString(undefined, {maximumFractionDigits: 0}) + ' /Hour [' + (timeDiff / 3600000).toFixed(2) + 'hrs]<br>' + leaderTracker[i].lastHrpph.toLocaleString(undefined, {maximumFractionDigits: 0}) + ' /Hour [last hr] ';
-  //                var searchvalue = 'LWG';
-  //                $(".button-lwg").on('click', function(){
-  //                    var matcher = new RegExp(searchvalue, 'gi');
-  //                    $('.leaderboard-portrait-' + leaderTracker[i].userId).show().not(function(){
-  //                        return matcher.test($(this).find('.name').text())
-  //                    }).hide();
-  //                  });
-        }
-    }
-  }
-  //    async function AddLWGoptions() {
-  //        $('.footer-row').find('.tab-buttons').append('<button class="tab button-lwg"><span>Only LWG Members</span></button>');
-             
-  //    }
-  async function ActivateLeaderTracker() {
-    CheckLWGLeaderboard();
-    Game.app.on("LeaderboardUI-Loaded", t=>{InsertLWGTrackedLeaders()});
-    
-  }
-  
-  // ranking profile
-  'use strict';
-  
-  let loaded4 = 0;
-  
-  let rankObserver = new MutationObserver(function(mutations) {
-      if (document.querySelector('.hud .hud-right .right-hud .leaderboard') && loaded4 == 0) {
-          loaded4 = 1;
-          rankObserver.disconnect();
-          activateDisplayRank();
+  document.querySelector('.leaderboard').addEventListener('click', e => {
+      if (e.target.closest('.player')) {
+          let targetTownName = e.target.closest('.player').querySelector('.name').innerHTML;
+          let targetTown = Object.values(Game.world.towns).filter(function(el){return el.name == targetTownName})[0];
+          let worldPos = Game.world.GetWorldPositionFromMapIndex(targetTown.x, targetTown.y);
+          Game.app.root.findByName('CameraWorld').script.cameraController.SetPosition(worldPos.x, worldPos.z);
+          document.querySelector('.leaderboard .close-button').click();
+          if (HUD.instance && HUD.instance.activeView == 'Town') {Game.app.fire('SetWorldView')};
+          Game.app.root.findByName('CameraWorld').script.cameraController.Tap({x: (window.innerWidth/2), y: (window.innerHeight/2)});
       }
   });
-  
-  async function getRank() {
-      const user = await API.getGameSelf();
-      //** Oizys edited start
-      // console.log(user);
-      //** Oizys edited end
-      const userRank = parseInt(user.pointsRank);
-      //** Oizys edited start
-      // console.log(userRank);
-      //** Oizys edited end
-      if (userRank > 0) {
-          let rankElement = document.getElementById('player-personal-rank');
-          rankElement.innerHTML = '<span style="font-size:18px;">Rank</span><b> '+ userRank + '</b>';
-          let fontSize = 20;
-          if (userRank > 999) {
-              fontSize = 18;
+}
+
+async function CheckLWGLeaderboard() {
+  API.scoreLeaderboard(0, 5000).then(leaders=>{
+      for (let i=0, n=leaders.length; i < n; i++) {
+          let tracker = leaderTracker.find(leader => leader.userId == leaders[i].userId)
+          if (tracker) {
+              let timeDiff = Date.now() - tracker.startTime;
+              tracker.pph = (leaders[i].score - tracker.startScore) / (timeDiff / 3600000);
+              tracker.rank = leaders[i].rank;
+              let lastHrDiff = Date.now() - tracker.lastHrTime;
+              if (lastHrDiff > 3600000) {
+                  tracker.lastHrpph = (leaders[i].score - tracker.lastHrScore) / (lastHrDiff / 3600000);
+                  tracker.lastHrTime = Date.now();
+                  tracker.lastHrScore = leaders[i].score;
+              }
+          } else {
+              leaderTracker.push({userId: leaders[i].userId, name: leaders[i].name, rank: leaders[i].rank, startTime: Date.now(), startScore: leaders[i].score, pph: 0, lastHrTime: Date.now(), lastHrScore: leaders[i].score, lastHrpph: 0});
           }
-          rankElement.style.fontSize = fontSize + 'px';
       }
-      setTimeout(getRank, 30000);
+      InsertLWGTrackedLeaders()
+      setTimeout(CheckLWGLeaderboard, 60000);
+  });
+}
+
+function InsertLWGTrackedLeaders() {
+  for (let i=0, n=leaderTracker.length; i < n; i++) {
+      if (document.querySelector('.leaderboard-portrait-' + leaderTracker[i].userId)) {
+          let trackedLeaderElem = document.querySelector('#tracked-leader-' + leaderTracker[i].userId);
+          let trackedLeaderText;
+          if (!trackedLeaderElem) {
+              trackedLeaderElem = document.createElement('div');
+              trackedLeaderElem.id = 'tracked-leader-' + leaderTracker[i].userId;
+              trackedLeaderText = document.createElement('div');
+              trackedLeaderText.classList.add('bank');
+              trackedLeaderText.style.fontSize = '18px';
+              trackedLeaderText.style.padding = '4px 8px';
+              trackedLeaderElem.appendChild(trackedLeaderText);
+              let targetLeader = document.querySelector('.leaderboard-portrait-' + leaderTracker[i].userId)
+              targetLeader.insertBefore(trackedLeaderElem, targetLeader.querySelector('.score'));
+          } else {
+              trackedLeaderText = trackedLeaderElem.querySelector('div');
+          }
+          let timeDiff = Date.now() - leaderTracker[i].startTime;
+          trackedLeaderText.innerHTML = leaderTracker[i].pph.toLocaleString(undefined, {maximumFractionDigits: 0}) + ' /Hour [' + (timeDiff / 3600000).toFixed(2) + 'hrs]<br>' + leaderTracker[i].lastHrpph.toLocaleString(undefined, {maximumFractionDigits: 0}) + ' /Hour [last hr] ';
+//                var searchvalue = 'LWG';
+//                $(".button-lwg").on('click', function(){
+//                    var matcher = new RegExp(searchvalue, 'gi');
+//                    $('.leaderboard-portrait-' + leaderTracker[i].userId).show().not(function(){
+//                        return matcher.test($(this).find('.name').text())
+//                    }).hide();
+//                  });
+      }
   }
+}
+//    async function AddLWGoptions() {
+//        $('.footer-row').find('.tab-buttons').append('<button class="tab button-lwg"><span>Only LWG Members</span></button>');
+           
+//    }
+async function ActivateLeaderTracker() {
+  CheckLWGLeaderboard();
+  Game.app.on("LeaderboardUI-Loaded", t=>{InsertLWGTrackedLeaders()});
   
-  function activateDisplayRank() {
-      let rank = document.createElement('div');
-      rank.id = 'player-personal-rank';
-      rank.style = 'font-size: 20px;min-width: 50px !important;text-align: center !important;height:54px !important;opacity: 0.8;border: 4px solid rgb(204, 204, 204);background-color: rgb(255, 255, 255);padding-left: 5px;padding-right: 5px;border-radius: 5px;margin-right: -3px;margin-top: 10px;}';
-      rank.textContent = '';
-      const leaderboardImage = document.querySelector('#player-scores-monitor');
-      leaderboardImage.parentNode.insertBefore(rank, leaderboardImage);
-      getRank();
-  }
-  
-  rankObserver.observe(document, {childList: true, subtree: true});
-  // ranking
-  
-  })();
+}
+
+// ranking profile
+'use strict';
+
+let loaded4 = 0;
+
+let rankObserver = new MutationObserver(function(mutations) {
+    if (document.querySelector('.hud .hud-right .right-hud .leaderboard') && loaded4 == 0) {
+        loaded4 = 1;
+        rankObserver.disconnect();
+        activateDisplayRank();
+    }
+});
+
+async function getRank() {
+    const user = await API.getGameSelf();
+    //** Oizys edited start
+    // console.log(user);
+    //** Oizys edited end
+    const userRank = parseInt(user.pointsRank);
+    //** Oizys edited start
+    // console.log(userRank);
+    //** Oizys edited end
+    if (userRank > 0) {
+        let rankElement = document.getElementById('player-personal-rank');
+        rankElement.innerHTML = '<span style="font-size:18px;">Rank</span><b> '+ userRank + '</b>';
+        let fontSize = 20;
+        if (userRank > 999) {
+            fontSize = 18;
+        }
+        rankElement.style.fontSize = fontSize + 'px';
+    }
+    setTimeout(getRank, 30000);
+}
+
+function activateDisplayRank() {
+  let rank = document.createElement('div');
+  rank.id = 'player-personal-rank';
+  rank.style = 'font-size: 20px;min-width: 50px !important;text-align: center !important;height:54px !important;opacity: 0.8;border: 4px solid rgb(204, 204, 204);background-color: rgb(255, 255, 255);padding-left: 5px;padding-right: 5px;border-radius: 5px;margin-right: -3px;margin-top: 10px;}';
+  rank.textContent = '';
+  const leaderboardImage = document.querySelector('#player-scores-monitor');
+  leaderboardImage.parentNode.insertBefore(rank, leaderboardImage);
+  getRank();
+}
+
+rankObserver.observe(document, {childList: true, subtree: true});
+// ranking
+
+})();
