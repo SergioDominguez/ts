@@ -12,7 +12,7 @@
 (function() {
     'use strict';
     const trackedItems = [
-        {item: 'Wheat', count: 0, first: 0, oneMin: 0, oneHour: 0},
+        {item: 'Wool', count: 0, first: 0, oneMin: 0, oneHour: 0},
         {item: 'Wood', count: 0, first: 0, oneMin: 0, oneHour: 0},
     ];
     let loaded = 0;
