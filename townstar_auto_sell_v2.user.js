@@ -17,13 +17,14 @@
 	// minGas is the minimum amount of gas needed in storage before attempting to sell this item
 	//    this enables high volume / low value / overflow items to only be sold if there is a sufficient gas reserve
     const craftedItems = [
-        {item: 'Baguette', keepAmt: 0, sellMin: 0, minGas: 1},
-        {item: 'Butter', keepAmt: 10, sellMin: 0, minGas: 1},
-        {item: 'Milk', keepAmt: 10, sellMin: 0, minGas: 10},
-	{item: 'Salt', keepAmt: 10, sellMin: 0, minGas: 10},
-	{item: 'Four', keepAmt: 10, sellMin: 0, minGas: 10},
-	{item: 'Sugar', keepAmt: 10, sellMin: 0, minGas: 10},
-	{item: 'Sugarcane', keepAmt: 20, sellMin: 0, minGas: 10},
+	    {item: 'Baguette', keepAmt: 0, sellMin: 0, minGas: 1},
+	    {item: 'Butter', keepAmt: 10, sellMin: 0, minGas: 1},
+	    {item: 'Milk', keepAmt: 10, sellMin: 0, minGas: 10},
+	    {item: 'Salt', keepAmt: 10, sellMin: 0, minGas: 10},
+	    {item: 'Four', keepAmt: 10, sellMin: 0, minGas: 10},
+	    {item: 'Eggs', keepAmt: 10, sellMin: 0, minGas: 10},
+	    {item: 'Sugar', keepAmt: 10, sellMin: 0, minGas: 10},
+	    {item: 'Sugarcane', keepAmt: 20, sellMin: 0, minGas: 10},
     ]
     let apiTokenSet = false;
 
